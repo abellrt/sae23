@@ -20,11 +20,11 @@
 			or die("Execution de la requete impossible : $requete");
 
 		$ligne = mysqli_fetch_row($resultat);
-		if ($ligne && $motdep==$ligne[0] AND $ligne[1] == 'E')
+		if ($ligne && $motdep==$ligne[0] AND $ligne[1] == 'B')
 		 {
 			$_SESSION["auth"]=TRUE;		
             mysqli_close($id_bd);
-			echo "<script type='text/javascript'>document.location.replace('affichebatE.php');</script>";
+			echo "<script type='text/javascript'>document.location.replace('affichebatB.php');</script>";
 		 }
 		else
 		 {

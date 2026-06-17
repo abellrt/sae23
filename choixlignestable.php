@@ -1,8 +1,8 @@
 <?php
 $requete = "SELECT 
-            bat.nom_bât, 
+            b.nom_bât, 
             s.nom_salle,
-			c.type,			
+			c.type_capteur,			
             m.valeurs, 
             m.date, 
             m.horaire
@@ -10,7 +10,7 @@ $requete = "SELECT
         INNER JOIN capteurs c ON m.nom_capteur = c.nom_capteur
         INNER JOIN salles s ON c.nom_salle = s.nom_salle
         INNER JOIN bâtiments b ON s.ID_bât = b.ID_bât
-        ORDER BY m.ID DESC
+        ORDER BY m.id DESC ,b.nom_bât ASC
 		LIMIT 16";
 			$resultat = mysqli_query($id_bd, $requete)
 					or die("Execution de la requete impossible : $requete");

@@ -5,7 +5,7 @@ $maxTempB201 = 0;
 $minTempB201 = 99; 
 
 foreach ($resultat as $val) {
-    if ($val['nom_salle'] == "B201" && $val['type'] == "temperature") {
+    if ($val['nom_salle'] == "B201" && $val['type_capteur'] == "temperature") {
         $sommeTempB201 += $val['valeurs'];
         $compteTempB201++;
         
@@ -34,7 +34,7 @@ $maxHumidB201 = 0;
 $minHumidB201 = 99;
 
 foreach ($resultat as $val) {
-    if ($val['nom_salle'] == "B201" && $val['type'] == "humidity") {
+    if ($val['nom_salle'] == "B201" && $val['type_capteur'] == "humidity") {
         $sommeHumidB201 += $val['valeurs'];
         $compteHumidB201++;
         
@@ -63,7 +63,7 @@ $maxCO2B201 = 0;
 $minCO2B201 = 9999; 
 
 foreach ($resultat as $val) {
-    if ($val['nom_salle'] == "B201" && $val['type'] == "co2") {
+    if ($val['nom_salle'] == "B201" && $val['type_capteur'] == "co2") {
         $sommeCO2B201 += $val['valeurs'];
         $compteCO2B201++;
         
@@ -92,7 +92,7 @@ $maxPresB201 = 0;
 $minPresB201 = 9999; 
 
 foreach ($resultat as $val) {
-    if ($val['nom_salle'] == "B201" && $val['type'] == "pressure") {
+    if ($val['nom_salle'] == "B201" && $val['type_capteur'] == "pressure") {
         $sommePresB201 += $val['valeurs'];
         $comptePresB201++;
         

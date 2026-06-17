@@ -26,8 +26,8 @@
 				<fieldset>
 					<legend>Saissez le nom d'utilisateur</legend>
 					<label for="login">utilisateur : </label>
-					<input type="text" name="login" id="login" />
-					<legend>Saissez le mot de passe...</legend>
+					<input type="text" name="login" id="login" /></br>
+					Saissez le mot de passe...
 					<label for="mot_de_passe">Mot de passe : </label>
 					<input type="password" name="mot_de_passe" id="mot_de_passe" />
 				</fieldset>

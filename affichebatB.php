@@ -14,11 +14,11 @@
 	include ("mysql.php");
 	?>
 	<table>
-	<tr><th>Bâtiments</tr></th> <tr><th>Nom de la Salle</tr></th> <tr><th>Valeur</tr></th> <tr><th>date</tr></th> <tr><th>Heure</tr></th>
+	<tr><th>Bâtiments</th> <th>Nom de la Salle</th> <th>Type du Capteurs</th> <th>Valeur</th> <th>date</th> <th>Heure</th></tr>
 	<?php
-	include ("choixlignestableE.php");
+	include ("choixlignestable2.php");
 	foreach ($resultat as $val )
-	echo "<tr><td>. $val['nom_bât'] .</td> <td>. $val['nom_salle'] .</td> <td>. $val['valeurs'] .</td> <td>. $val['date'] .</td> <td>$horaire</td></tr>">;
+	echo "<tr><td>". $val['nom_bât'] ."</td> <td>". $val['nom_salle'] ."</td> <td>". $val['type_capteur'] ."</td> <td>". $val['valeurs'] ."</td> <td>". $val['date'] ."</td> <td>".$val['horaire']."</td></tr>";
 	?>
 	</table>
 	</section>
@@ -45,8 +45,9 @@ echo "Le maximum de la pression pour la salle B103 est $maxPresB103 hPa <br />";
 ?>
 </section>
 
-<h2>Salle B201</h2>
+
 <section>
+	<h2>Salle B201</h2>
 <?php
 include ("calculB201.php");
 
@@ -67,5 +68,4 @@ echo "Le minimum de la pression pour la salle B201 est $minPresB201 hPa <br />";
 echo "Le maximum de la pression pour la salle B201 est $maxPresB201 hPa <br />";
 ?>
 </section>
-	</section>
 	</body>

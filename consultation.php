@@ -14,11 +14,11 @@
 	include ("mysql.php");
 	?>
 	<table>
-	<tr><th>Bâtiments</th> <tr><th>Nom de la Salle</th> <tr><th>Valeur</th> <tr><th>date</th> <tr><th>Heure</th>
+	<tr><th>Bâtiments</th> <th>Nom de la Salle</th> <th>Type du Capteurs</th> <th>Valeur</th> <th>date</th> <th>Heure</th> </tr>
 	<?php
 	include ("choixlignestable.php");
 	foreach ($resultat as $val )
-	echo "<tr><td>." $val['nom_bât'] ."</td> <td>". $val['nom_salle'] ."</td> <td>". $val['type'] ."</td> <td>". $val['valeurs'] ."</td> <td>". $val['date'] ."</td> <td>". $val['horaire'] ."</td></tr>">;
+	echo "<tr><td>". $val['nom_bât'] ."</td> <td>". $val['nom_salle'] ."</td> <td>". $val['type_capteur'] ."</td> <td>". $val['valeurs'] ."</td> <td>". $val['date'] ."</td> <td>". $val['horaire'] ."</td></tr>";
 	?>
 	</table>
 	</section>

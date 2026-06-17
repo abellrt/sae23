@@ -31,8 +31,8 @@
 			<hr />
 		</section>
 		<footer>
-			<p><a href="catalogue.php">Retour au catalogue</a></p>
-			<p><a href="login_form.php">Retour à l'identification</a></p>
+			<p><a href="index.html">Retour au catalogue</a></p>
+			<p><a href="choix_gestion.php">Retour à l'identification</a></p>
 		</footer>
 	</body>
 </html>
