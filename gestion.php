@@ -7,7 +7,7 @@
 <html lang="fr">
 	<head>
 		<meta charset="UTF-8" />
-		<title>Gestion Batiments E</title>
+		<title>Gestion Batiments B</title>
 		<link rel="stylesheet" type="text/css" href="./styles/smi.css" />
 	</head>
 
@@ -19,15 +19,14 @@
 		<section>
 			<p>
 				<br />
-				<em><strong>Gestion Bâtiment E</strong></em>
+				<em><strong>Gestion des Bâtiments</strong></em>
 				<br />
 			</p>
-			<form action="login3.php" method="post" enctype="multipart/form-data">
+			<form action="login2.php" method="post" enctype="multipart/form-data">
 				<fieldset>
 					<legend>Saissez le nom d'utilisateur</legend>
-					<label for="login">utilisateur : </label>
-					<input type="text" name="login" id="login" /></br>
-					Saissez le mot de passe...
+					<label for="login2">utilisateur : </label>
+					<input type="text" name="login" id="login" /> </br>
 					<label for="mot_de_passe">Mot de passe : </label>
 					<input type="password" name="mot_de_passe" id="mot_de_passe" />
 				</fieldset>

@@ -20,11 +20,14 @@
 			or die("Execution de la requete impossible : $requete");
 
 		$ligne = mysqli_fetch_row($resultat);
-		if ($ligne && $motdep==$ligne[0] AND $ligne[1] == 'B')
+		if ($ligne && $motdep==$ligne[0] AND $ligne[1])
 		 {
-			$_SESSION["auth"]=TRUE;		
+			$_SESSION["auth"]=TRUE;
+			
+			$_SESSION["batiment"] = $ligne[1];
+
             mysqli_close($id_bd);
-			echo "<script type='text/javascript'>document.location.replace('affichebatB.php');</script>";
+			echo "<script type='text/javascript'>document.location.replace('affichage_gestion.php');</script>";
 		 }
 		else
 		 {

@@ -10,8 +10,11 @@ $requete = "SELECT
         INNER JOIN capteurs c ON m.nom_capteur = c.nom_capteur
         INNER JOIN salles s ON c.nom_salle = s.nom_salle
         INNER JOIN bâtiments b ON s.ID_bât = b.ID_bât
-        ORDER BY m.id DESC ,b.nom_bât ASC
-		LIMIT 16";
+        WHERE m.id IN (
+        SELECT MAX(id)
+        FROM mesures
+        GROUP BY nom_capteur)
+        ORDER BY b.nom_bât ASC";
 			$resultat = mysqli_query($id_bd, $requete)
 					or die("Execution de la requete impossible : $requete");
 				mysqli_close($id_bd);

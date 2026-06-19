@@ -1,4 +1,6 @@
 <?php
+session_start();
+$batiment_gestionnaire = $_SESSION["batiment"];
 $requete = "SELECT 
             b.nom_bât, 
             s.nom_salle, 
@@ -10,7 +12,7 @@ $requete = "SELECT
         INNER JOIN capteurs c ON m.nom_capteur = c.nom_capteur
         INNER JOIN salles s ON c.nom_salle = s.nom_salle
         INNER JOIN bâtiments b ON s.ID_bât = b.ID_bât
-		WHERE b.nom_bât = 'B'
+        WHERE b.nom_bât = '$batiment_gestionnaire'
         ORDER BY m.id DESC";
 			$resultat = mysqli_query($id_bd, $requete)
 					or die("Execution de la requete impossible : $requete");
