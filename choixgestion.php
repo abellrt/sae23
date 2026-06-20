@@ -1,4 +1,5 @@
 <?php
+//The recovery script for the boxes that we need for managing and selecting buildings.
 session_start();
 $batiment_gestionnaire = $_SESSION["batiment"];
 $requete = "SELECT 

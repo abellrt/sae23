@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+ <html lang="fr">
+  <head>
+   <meta charset="UTF-8" />
+   <title>Sae23</title>
+   <link rel="stylesheet" type="text/css" href="./styles/smi.css" />
+  </head>
+  <body>
+   <header>
+    <div><h1><br />Gestion de projet<br /></h1></div>
+    <hr />
+    <hr />
+   </header>
+   <section>
+    <h2>Introduction :</h2>
+    Nous avons réalisé ce projet dans le cadre de la SAé 23 “Mettre en place une solution informatique pour l’entreprise”, présentée au semestre 2. Il nous a été confié par nos enseignants dans un contexte professionnel simulé. <br>
+    L’objectif était d’exploiter les données de capteurs IoT répartis dans les bâtiments de l'IUT et de les rendre accessibles via une interface web. <br><br>
+    
+    Pendant plusieurs semaines, nous avons travaillé en groupe pour concevoir et déployer une solution complète, en mobilisant les compétences acquises en bases de données et en développement web, dans l’optique de répondre aux attentes de la problématique. <br>
+   </section>
+   <section>
+    <h2>Problématique</h2>
+    Comment concevoir et mettre en place une solution informatique complète permettant la collecte, le stockage et la visualisation de données issues de capteurs IoT, tout en offrant une interface web sécurisée, adaptée aux différents profils d'utilisateurs de l'IUT ?
+   </section>
+   <section>
+    <h2>Les solutions proposées :</h2>
+    Pour répondre à la problématique, deux solutions ont été demandées. La première repose sur une chaîne de conteneurs Docker associant Mosquitto, Node-RED, InfluxDB et Grafana. Elle présente l'avantage d'un prototypage rapide avec peu de code à produire et offre une interface claire pour le gestionnaire, mais possède d’importantes limites : absence de gestion de comptes, accès Node-RED non sécurisé et peu de flexibilité pour des affichages personnalisés. <br>
+    La seconde solution est un site web dynamique développé avec PHP et MySQL. Plus exigeante en termes de développement, elle permet en contrepartie une gestion fine des utilisateurs et des accès, une sécurisation des pages via des sessions, ainsi que des formulaires adaptés aux besoins de chaque profil. 
+   </section>
+    <section>
+    <h2>Cahier des charges :</h2>
+    Contient les tables : bâtiment, salle, capteur, mesure. <br>
+    Les bases de données doivent être connectés de manière hiérarchiques <br>
+    Chaque bâtiment est géré par un compte gestionnaire dédié. <br>
+    <hr>
+    site web : <br>
+    Cinq pages minimum (page d’accueil publique avec les salles et les batiments équipés ) (page gestionnaire) (page de gestion) (page de consultation accessible à tout le monde avec les dernières valeurs ) (page gestion de projet (Gantt + compte et bilan individuel)). <br>
+et en termes de développement, elle permet en contrepartie une gestion fine des utilisateurs et des accès, une sécurisation des pages via des sessions, ainsi que des formulaires adaptés aux besoins de chaque profil. 
+ <hr>
+ Contraintes techniques : 
+ sur une machine virtuelle linux avec un serveur lampp, langage css html5 php javascript et bash + suivit des versions sur github + codes commentés en anglais
+<hr>
+dockers : <br>
+Une chaîne Docker opérationnelle avec dashboard Grafana, un flow Node-RED fonctionnel et une automatisation via crontab.
+    </section>
+    <section>
+        <h2>analyse cahier des charges gantt prévisionnel :</h2>
+        <img class= "image-responsive" src="./images/gantt_previ.png" alt="Gantt Prévisionnel" /><br><br>
+        Figure 1 : Gantt prévisionnel <br>
+        Le projet commence par les TP d’introduction à la SAE qui nous permettent de découvrir et de commencer à prendre en main les Docker, de créer une base de données et d’utiliser l’outil de gestion de version GitHub. <br>
+        Le projet se sépare donc en deux parties pour chacune des solutions demandées ; la première est la création d’une VM et de conteneurs Docker tels que Mosquitto pour la réception de données, Node-RED pour la gestion et le paramétrage des flux, InfluxDB pour la base de données et Grafana pour l’affichage de graphiques. <br>
+        La deuxième partie, consacrée à la solution du site web dynamique, commence par les scripts indispensables ainsi que la mise en place des tables de la base de données. Avec ces scripts, il faut ensuite créer les pages web ainsi que la gestion de la base de données depuis le site, à l’aide d’un formulaire de connexion ; il suffit ensuite d’automatiser les scripts ainsi que de publier le site web. <br>
+         <hr>
+         Gantt réel : 
+        <img class= "image-responsive" src="./images/gantt_reel.png" alt="Gantt réel" /><br><br>
+        Figure 2 Gantt réel <br>
+        Les modifications qui ont été réalisé est que le mosquitto a pris 2 jours au lieu de 6 jours. Grafana a été fait en 7 jours. <br>
+        Enfin l'automatisation du crontab a été fait en 2 jours à cause du problème de lancement des dockers au démarage.<br>
+
+        Pour le site web:
+        Le script de récupération a pris 3 jours au lieu de 1 jours du a un mauvais choix du langage de programmation.
+        Ensuite la base de données a pris 4 jours au lieu de 1 jours car elle a été modifié.
+        l'automatisation a été fait 21 juin car il fallait finir les tâches avant de l'automatiser.
+    </section>
+    <section>
+        <h2>compte rendu personnel :</h2>
+        Docker (Labourse--Sarnin): <br>
+        La chaîne de traitement mise en place permet de visualiser les données des capteurs déployés dans les bâtiments de l'IUT. Elle repose sur quatre outils, chacun hébergé dans un conteneur Docker dédié : Mosquitto, Node-RED, InfluxDB et Grafana.<br>
+        Les capteurs publient leurs mesures via MQTT, Mosquitto les redistribue,  Node-RED les récupère et les convertit, InfluxDB les enregistre dans la base de données et Grafana les affiche sous forme de dashboard. <br>
+        <img class= "image-responsive" src="./images/docker.png" alt="Docker présent" /><br><br>
+        Figure 3 : dockers présents sur la VM <br>
+        1. Mosquitto <br>
+        Mosquitto joue le rôle de récupérateur et de distributeur des messages MQTT. Les capteurs publient leurs données sur le broker MQTT de l’IUT, et il les redistribue à tous mes abonnés comme Node-RED.<br>
+        2 Node-RED <br>
+          Node-RED est le cœur de la chaîne. Il souscrit aux topics MQTT des capteurs, convertit les données reçues en valeurs numériques, puis les insère dans la base InfluxDB.  <br>
+        <img class= "image-responsive" src="./images/nodered.png" alt="Node-RED" /><br><br>
+        Figure 4 : flow Node-RED <br>
+      Le flow est composé de trois nœuds enchaînés : <br>
+        <ul>
+            <li>mqtt in : souscription aux topics des capteurs</li>
+            <li>change : conversion du payload en nombre ($number(payload))</li>
+            <li>influxdb out : écriture dans la base capteurs</li>
+        </ul>
+        
+En parallèle, un dashboard Node-RED affiche, en temps réel, une jauge par capteur, regroupées par bâtiment. <br>
+ <img class= "image-responsive" src="./images/dash_nodered.png" alt="Dashbord Node-RED" /><br><br>
+ Figure 5 : dashboard Node-RED <br>
+ 3 InfluxDB
+InfluxDB stocke chaque mesure reçue avec un horodatage précis, le nom de la salle et celui du bâtiment en tant que « tags », et la valeur du capteur en tant que « field ». <br>
+<img class= "image-responsive" src="./images/influxdb.png" alt="InfluxDB" /><br><br>
+ Figure 6 : base de données influfDB <br>
+4 Grafana  <br>
+ Grafana se connecte à InfluxDB comme source de données et permet de construire un dashboard présentant l'ensemble des capteurs des deux bâtiments. Chaque panel affiche l'évolution de la mesure d'une salle, avec un rafraîchissement automatique toutes les 30 secondes. <br>
+<img class= "image-responsive" src="./images/dash_grafana.png" alt="Dashbord Grafana" /><br><br>
+Figure 7 : exemple dashboard d’une salle de cours <br>
+<img class= "image-responsive" src="./images/parametre_grafana.png" alt="Paramètres Grafana" /><br><br>
+ Figure 8 : paramétrage d’un des graphique d’une des salles <br>
+ 5 automatisation des docker lors du lancement de la machine : <br>
+Pour automatiser le lancement des dockers au démarrage de la machine, on a utilisé le crontab qui exécute la commande permettant de lancer les différents dockers <br><br>
+commande crontab : <br>
+@reboot sleep 30 && /home/etud/Desktop/bash_start <br>
+contenu fichier bash_start : <br>
+#!/bin/bash <br>
+docker start mosquittoRT noderedRT influxdbRT grafanaRT <br>
+6 Problèmes rencontrés : <br>
+Durant le projet, on a observé que certains capteurs n'envoyaient pas toutes les données qu'ils devraient. Sur le dashboard Grafana, cela se traduit par des erreurs dans les dashboards avec  l'affichage du message "No data" pour certains panels, alors que d'autres capteurs fonctionnent normalement. <br>
+<img class= "image-responsive" src="./images/abs_donnees.png" alt="absence de données" /><br><br>
+Figure 9 : exemple d’absence de données sur grafana
+<br>
+</section>
+<section>
+    <h2>Ardouin: Scripts</h2> <br>
+    Afin d’alimenter la base de données du site web avec les mesures issues des capteurs IoT, nous avons développé un script en PHP exécuté en ligne de commande sur la machine virtuelle Linux. Son rôle est de récupérer automatiquement les données publiées sur le broker MQTT, de les décoder, puis de les enregistrer dans la base MySQL utilisée par notre application web. <br>
+    <hr>
+    Fonctionnement général du script <br>
+    Le script commence par se connecter au broker MQTT de l’IUT à l’aide de la commande mosquitto_sub. Cette commande permet d’écouter un topic précis correspondant à une salle équipée de capteurs, ici par exemple :
+    <img class= "image-responsive" src="./images/mosquitto_sub.png" alt="mosquitto_sub" /><br><br>
+    Figure 10 : exemple de résultat de la commande mosquitto_sub <br>
+    Le script récupère un message au format JSON contenant les différentes mesures envoyées par le capteur, telles que :
+    <ul>
+        <li>la température ;</li>
+        <li>le taux de CO₂ ;</li>
+        <li>l’humidité ;</li>
+        <li>la pression atmosphérique.</li>
+    </ul>
+    <br>
+    Une fois le message reçu, il est décodé grâce à la fonction json_decode(), ce qui permet d’accéder individuellement aux différentes valeurs mesurées ainsi qu’au nom du capteur. <br>
+    <hr>
+    Insertion des données dans la base :
+    Après la récupération des données, le script établit une connexion à la base de données MySQL. Les informations extraites du message sont ensuite insérées dans la table mesures.
+ Pour chaque message reçu, plusieurs enregistrements sont ajoutés : un pour la température, un pour le CO₂, un pour l’humidité et un pour la pression. Chaque insertion contient : <br>
+    <ul>
+        <li>le nom du capteur ;</li>
+        <li>la date de la mesure ;</li>
+        <li>l’heure de la mesure ;</li>
+        <li>la valeur mesurée.</li>
+    </ul>
+ <br>
+ Le nom du capteur est construit de manière à identifier à la fois le type de mesure et le capteur concerné, par exemple temperature_AM107-33 ou co2_AM107-4. <br>
+ <img class= "image-responsive" src="./images/tableau.png" alt="Tableau sql" /><br><br>
+ Figure 11 : donné enregistrée dans la table de donnée <br>
+ <hr>
+ Intérêt du script dans le projet : <br>
+ Ce script permet le lien entre les capteurs IoT et la base de données du site. Grâce à lui, les données sont récupérées automatiquement sans intervention manuelle, puis stockées de façon exploitable pour l’affichage sur les pages web. <br>
+Il permet donc :<br>
+d’automatiser la collecte des mesures, de conserver un historique des données reçues, d’alimenter les pages de consultation avec des valeurs récentes, de préparer les données pour d’éventuels traitements ou graphiques.<br>
+<hr>
+Difficultés rencontrées : <br>
+La mise en place de ce script a demandé plusieurs ajustements. En effet, le format des données reçues a dû être vérifié et adapté au traitement PHP, et la structure de la base de données a évolué au fil du projet. De plus, l’automatisation du lancement du script a nécessité l’utilisation d’une tâche planifiée (crontab) afin d’exécuter régulièrement la récupération des données.<br>
+<img class= "image-responsive" src="./images/crontab_script.png" alt="Crontab Script" /><br><br>
+
+
+
+
+
+
+
+
+</section>
+<section>
+    <h2>Thibault : pages web et la base de données</h2>
+</section>
+<section>
+    <h2>Alexi : pages web</h2> <br>
+
+    Lors de cette SAé en groupe, mon travail était de créer les pages web. Les pages web que j'ai réalisées sont : l'accueil, où il y a l'explication de la SAé 23, la gestion, où j'ai eu quelques problèmes sur les listes déroulantes que je n'ai pas réussi à réaliser ; ensuite, les pages web de compte rendu et de consultation, qui affichent les dernières valeurs. Par manque de temps, j'ai délégué les pages web de l'administration pour l'ajout et la suppression de données. <br>
+
+Les programmes PHP ont été a chaque fois séparé pour rendre plus lisible le programme pou le client et pour le groupe a travaillé. le calcul de moyenne minimum et maximum était en partie repris de ma SAé15. <br><br>
+
+Problèmes rencontrés :<br><br>
+
+J'ai rencontré des difficultés avec la page de gestion pour la liste déroulante. J'ai commencé à faire le formulaire, mais par manque de temps, car j'ai mal lu le cahier des charges, la  page de traitement et celle pour l'affichage n'ont pas été faites. <br><br>
+Les autres problèmes rencontrés sont des petites erreurs dans la programmation ; quand je ne comprenais pas, je me suis aidé de l'IA pour les régler.
+</section>
+    <section>
+        <h2>Conclusion</h2>
+        Ce projet nous a permis de mettre en pratique, dans un cadre concret et professionnalisant, les compétences acquises au cours du semestre en bases de données, développement web, administration système et gestion de projet. À travers la réalisation des deux solutions demandées, nous avons pu découvrir deux approches différentes de la valorisation de données issues de capteurs IoT. <br><br>
+
+La première solution, basée sur une architecture Docker avec Mosquitto, Node-RED, InfluxDB et Grafana, nous a permis de mettre en place rapidement une chaîne fonctionnelle de collecte, de traitement et de visualisation des données. Elle constitue une solution efficace pour le prototypage et l’affichage technique, mais reste limitée en matière de sécurité, de personnalisation et de gestion des utilisateurs. <br><br>
+
+La seconde solution, fondée sur un site web dynamique en PHP/MySQL, a demandé davantage de travail de conception et de développement, mais elle répond plus précisément au cahier des charges. Elle offre une meilleure gestion des comptes, des droits d’accès et de l’affichage des données selon les profils utilisateurs, tout en assurant une interface plus adaptée à une utilisation réelle au sein de l’IUT.<br><br>
+
+Malgré certaines difficultés rencontrées au cours du projet, notamment lors de l’automatisation des scripts, de la mise en place de la base de données ou encore du démarrage des conteneurs, nous avons su nous organiser, nous répartir les tâches et adapter notre planning. 
+
+    </section>

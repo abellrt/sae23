@@ -1,5 +1,5 @@
 <?php
-	// Démarrage de la session
+	//We start the session
 	session_start();
 ?>
 
@@ -7,19 +7,20 @@
 <html lang="fr">
 	<head>
 		<meta charset="UTF-8" />
-		<title>Gestion Batiments B</title>
+		<title>Gestion Batiments</title>
 		<link rel="stylesheet" type="text/css" href="./styles/smi.css" />
 	</head>
 
 	<body>
-		<!-- Affichage entete -->
+		<!-- Header display -->
 		<?php 
 			include("entete.html"); 
 		?>
 		<section>
+		<!-- Access form to enable managers to access their buildings. -->
 			<p>
 				<br />
-				<em><strong>Gestion des Bâtiments</strong></em>
+				<em><strong>Accès Gestion des Bâtiments</strong></em>
 				<br />
 			</p>
 			<form action="login2.php" method="post" enctype="multipart/form-data">
@@ -37,6 +38,7 @@
 			<hr />
 		</section>
 		<footer>
+		<!-- Back to the home page -->
 			<p><a href="index.html">Retour à l'accueil</a></p>
 		</footer>
 	</body>

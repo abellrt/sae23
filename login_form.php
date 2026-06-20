@@ -1,5 +1,5 @@
 <?php
-	// Démarrage de la session
+	// Start of the session
 	session_start();
 ?>
 
@@ -12,11 +12,12 @@
 	</head>
 
 	<body>
-		<!-- Affichage entete -->
+		<!-- Header display -->
 		<?php 
 			include("entete.html"); 
 		?>
 		<section>
+ <!-- Form to access the page for deleting and adding items -->
 			<p>
 				<br />
 				<em><strong>Administration de la base : Acc&egrave;s limit&eacute; aux personnes autoris&eacute;es</strong></em>
@@ -27,7 +28,6 @@
 					<legend>Saissez le nom d'utilisateur</legend>
 					<label for="login">utilisateur : </label>
 					<input type="text" name="login" id="login" />
-					<legend>Saissez le mot de passe...</legend>
 					<label for="mot_de_passe">Mot de passe : </label>
 					<input type="password" name="mot_de_passe" id="mot_de_passe" />
 				</fieldset>
@@ -37,6 +37,7 @@
 			</form>
 			<hr />
 		</section>
+<!-- Back to the home page -->
 		<footer>
 			<p><a href="index.html">Retour à l'accueil</a></p>
 		</footer>

@@ -1,4 +1,5 @@
 <?php
+//The mailbox recovery script we’re interested in for consultation
 $requete = "SELECT 
             b.nom_bât, 
             s.nom_salle,

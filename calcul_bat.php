@@ -1,5 +1,5 @@
 <?php
-
+// Script for calculating the maximum, minimum and average temperature
 foreach ($resultat as $val) {
     $salle=$val['nom_salle'];
 
@@ -20,10 +20,10 @@ foreach ($resultat as $val) {
         $minTemp[$salle] = $val['valeurs'];
     }
     }
-
+// Script for calculating the maximum, minimum and average humidity values
     if ($val['type_capteur'] == "humidity") {
         if (!isset($minHumid[$salle])) {
-            $minHumid[$salle] = 100; // Le max théorique de l'humidité est 100%
+            $minHumid[$salle] = 100; 
             $maxHumid[$salle] = 0;
             $sommeHumid[$salle] = 0;
             $compteHumid[$salle] = 0;
@@ -39,10 +39,10 @@ foreach ($resultat as $val) {
             $minHumid[$salle] = $val['valeurs'];
         }
     }
-
+// Script for calculating the maximum, minimum and average co2 values
     if ($val['type_capteur'] == "co2") {
         if (!isset($minCO2[$salle])) {
-            $minCO2[$salle] = 5000; // On met une valeur par défaut très haute pour le CO2
+            $minCO2[$salle] = 5000; 
             $maxCO2[$salle] = 0;
             $sommeCO2[$salle] = 0;
             $compteCO2[$salle] = 0;
@@ -58,10 +58,10 @@ foreach ($resultat as $val) {
             $minCO2[$salle] = $val['valeurs'];
         }
     }
-
+// Script for calculating the maximum, minimum and average pressure values
     if ($val['type_capteur'] == "pressure") {
         if (!isset($minPres[$salle])) {
-            $minPres[$salle] = 2000; // On met une valeur par défaut très haute pour la pression hPa
+            $minPres[$salle] = 2000; 
             $maxPres[$salle] = 0;
             $sommePres[$salle] = 0;
             $comptePres[$salle] = 0;

@@ -1,20 +1,20 @@
-/* Feuille de style : SMI */
+/* Stylesheet */
 
-html    /* Style � appliquer sur l'ensemble du document */
+html    /* Style of web page */
 { 
   margin: 0;
   padding: 0;
-  background: url(../images/smi5.jpg) no-repeat center fixed; 
-  background-size: cover; /* version standardis�e */
+  background: url(../images/smi5.jpg); /* add image on the background */
+  background-size: cover; 
 }
 
-body   /* Style � appliquer sur l'ensemble du corps du document */
+body   /* Style for body */
 {
-  margin-right: 5%;             /* Gestion des marges lat�rales */
+  margin-right: 5%;             
   margin-left: 5%;
 }
 
-h1    /* Style � appliquer sur les titres h1 */
+h1    /* Style for h1 */
 {
   background-color: rgba(255,255,255,0.35);
   text-align: center;
@@ -40,10 +40,10 @@ header
   text-align: center;
   clear: both;
 }
-p     /* Style � appliquer sur les paragraphes */
+p     /* Style for paragraph */
 {
   font-family: Arial, sans-serif;
-  color: #AD0000;      /* Couleur de texte : ocre */
+  color: #AD0000;      
   text-indent: 3%;
 }
 p.erreur
@@ -51,7 +51,7 @@ p.erreur
   font-weight: bold;
   color: white;
 }
-/* Gestion des hyperliens */
+/* Hyperlink gestion */
 a:link
 {
   color: #184A18;
@@ -174,9 +174,14 @@ img{
 		max-width: 100%;
 		height: auto;
     }
+.tableau-responsive 
+	{
+		max-width: 100%;
+		height: auto;
+    }
 }
 
-/* max-width pour fortes résolutions */
+/* max-width for high-resolution */
 @media screen and (min-width: 1280px) 
 {
 
@@ -226,4 +231,61 @@ img{
 	{
 	  clear: both;
 	}
+.tableau-responsive 
+	{
+		max-width: 100%;
+		height: auto;
+    }
+}
+
+@media screen and (min-width: 1280px) 
+{
+	nav ul li 
+	{
+		float: left;
+		border-right:1px solid #BBBBBB;
+	}
+		
+	nav ul li:last-child
+	{
+		border-right: none;
+		float:right;
+	}
+.tableau-responsive 
+	{
+		max-width: 100%;
+		height: auto;
+    }
+}
+
+/* max-width for low resolutions */
+@media screen and (max-width: 640px) 
+{
+	nav ul li 
+	{
+		float: none;
+		width: 100%;
+		border-right: none;
+	}
+
+	nav ul li a 
+	{
+		padding: 1px;
+	}
+
+	section#first 
+	{
+		padding-top: 300px;
+	}
+	section 
+	{
+		padding-top: 5px;
+		padding-right: 15px;
+	}
+.tableau-responsive 
+	{
+		max-width: 100%;
+		height: auto;
+    }
+	
 }

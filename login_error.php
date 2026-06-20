@@ -1,8 +1,8 @@
 <?php
-	// Démarrage de la session
+	// Start of the session
 	session_start();
 ?>
-
+<!-- web page to be displayed if there is a problem logging in -->
 <!DOCTYPE html>
 <html lang="fr">
 	<head>
@@ -12,11 +12,11 @@
 	 </head>
 
 	<body>
-		<!-- Affichage entete -->
+		<!-- Header display and erase session -->
 		<?php 
-			$_SESSION = array(); // Réinitialisation du tableau de session
-			session_destroy();   // Destruction de la session
-			unset($_SESSION);    // Destruction du tableau de session
+			$_SESSION = array(); 
+			session_destroy();   
+			unset($_SESSION);    
 			include("entete.html");
 		?>
 		<section>
@@ -31,8 +31,7 @@
 			<hr />
 		</section>
 		<footer>
-			<p><a href="index.html">Retour au catalogue</a></p>
-			<p><a href="choix_gestion.php">Retour à l'identification</a></p>
+			<p><a href="index.html">Retour a l'accueil </a></p>
 		</footer>
 	</body>
 </html>
