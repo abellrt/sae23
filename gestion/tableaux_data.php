@@ -4,48 +4,36 @@
 session_start();
 $mess_succes = "";
 
-
-// Buildings table initialisation
-if (!isset($_SESSION['liste_bat'])) {
-    $_SESSION['liste_bat'] = []; 
-}
-$liste_bati = $_SESSION['liste_bat'];
-
 /* connection to bâtiments table */
-$connexion = mysqli_connect("localhost", "facci","rt","sae23");
+$connexion = mysqli_connect("localhost", "facci", "rt", "sae23");
 if (!$connexion) {
     die("Échec de la connexion : " . mysqli_connect_error());
 }
 mysqli_set_charset($connexion, "utf8");
 
+// Fetch data from bâtiments table
 $requete = "SELECT * FROM bâtiments";
 $resultat = mysqli_query($connexion, $requete);
-
-
-// Rooms table initialisation
-if (!isset($_SESSION['liste_salles'])) {
-    // Quelques données de test par défaut si le tableau est vide
-    $_SESSION['liste_salles'] = []; 
+$liste_bati = [];
+while ($row = mysqli_fetch_assoc($resultat)) {
+    $liste_bati[] = $row;
 }
-$liste_salles = $_SESSION['liste_salles'];
 
- //--- connection to salles table ---
+// Fetch data from salles table
 $requete_salles = "SELECT * FROM salles";
 $resultat_salles = mysqli_query($connexion, $requete_salles);
-
-
-// Sensors table initialisation
-if (!isset($_SESSION['liste_capteurs'])) {
-    // Quelques données de test par défaut si le tableau est vide
-    $_SESSION['liste_capteurs'] = []; 
+$liste_salles = [];
+while ($row = mysqli_fetch_assoc($resultat_salles)) {
+    $liste_salles[] = $row;
 }
-$liste_capteurs = $_SESSION['liste_capteurs'];
 
-// --- connection to capteurs table ---
+// Fetch data from capteurs table
 $requete_capteurs = "SELECT * FROM capteurs";
 $resultat_capteurs = mysqli_query($connexion, $requete_capteurs);
-
-
+$liste_capteurs = [];
+while ($row = mysqli_fetch_assoc($resultat_capteurs)) {
+    $liste_capteurs[] = $row;
+}
 
 // flash message recovery 
 if (isset($_SESSION['flash_message'])) {
@@ -58,14 +46,14 @@ if (isset($_SESSION['flash_message'])) {
 <head>
     <meta charset="UTF-8">
     <title>Espace de Gestion</title>
-        <link rel="stylesheet" type="text/css" href="../styles/smi.css" />
-   <link rel="stylesheet" type="text/css" href="../styles/tableau.css" />
 </head>
 <body>
 
     <main>
         <header>
             <h1>Gestion des données l'IUT</h1>
+             <link rel="stylesheet" type="text/css" href="../styles/smi.css" />
+   <link rel="stylesheet" type="text/css" href="../styles/tableau.css" />
         </header>
 
         <?php if ($mess_succes != "") { ?>
@@ -96,7 +84,7 @@ if (isset($_SESSION['flash_message'])) {
                                 <td><?php echo $index + 1; ?></td> <!-- incrementation of the index -->
                                 <td><?php echo $user['nom_bât']; ?></td>
                                 <td><?php echo $user['login']; ?></td>
-                                <td><?php echo $user['mdp']; ?></td>
+                                <td><?php echo $user['mot_de_passe']; ?></td>
                                 <td>
                                    <a href="batiment/supprimer.php?id=<?php echo $index; ?>">Supprimer</a>
                                 </td>
@@ -129,12 +117,12 @@ if (isset($_SESSION['flash_message'])) {
                     <?php } else { ?>
                         <?php foreach ($liste_salles as $index => $salle) { ?>
                             <tr>
-                                <td><?php echo $index + 1; ?></td> <td><?php echo isset($salle['id_bât']) ? $salle['id_bât'] : 'Non défini'; ?></td> 
+                                <td><?php echo $index + 1; ?></td> <td><?php echo isset($salle['ID_bât']) ? $salle['ID_bât'] : 'Non défini'; ?></td> 
                                 <td><?php echo isset($salle['nom_salle']) ? $salle['nom_salle'] : 'Non défini'; ?></td>
                                 <td><?php echo isset($salle['type']) ? $salle['type'] : 'Non défini'; ?></td>
                                 <td><?php echo isset($salle['capacite_accueil']) ? $salle['capacite_accueil'] : 0; ?> places</td>
                                 <td>
-                                   <a href="salles/supprimer_salle.php?id=<?php echo $index; ?>">Supprimer</a>
+                                   <a href="salles/supprimer_salle.php?id=<?php echo urlencode($salle['nom_salle']); ?>">Supprimer</a>
                                 </td>
                             </tr>
                         <?php } ?>
@@ -171,7 +159,7 @@ if (isset($_SESSION['flash_message'])) {
                                 <td><?php echo $capteur['type_capteur']; ?></td>
                                 <td><?php echo $capteur['unité']; ?></td>
                                 <td>
-                                   <a href="capteurs/supprimer_capteurs.php?id=<?php echo $index; ?>">Supprimer</a>
+                                   <a href="capteurs/supprimer_capteurs.php?id=<?php echo urlencode($capteur['nom_capteur']); ?>">Supprimer</a>
                                 </td>
                             </tr>
                         <?php } ?>

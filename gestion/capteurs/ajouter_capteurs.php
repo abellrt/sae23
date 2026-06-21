@@ -2,11 +2,23 @@
 
 
 session_start();
-	$liste_salles = isset($_SESSION['liste_salles']) ? $_SESSION['liste_salles'] : [];if (isset($_POST['ajouter_capteurs'])) {
+$connexion_init = mysqli_connect("localhost", "facci", "rt", "sae23");
+if (!$connexion_init) {
+    die("Échec de la connexion : " . mysqli_connect_error());
+}
+mysqli_set_charset($connexion_init, "utf8");
+
+$res_salles = mysqli_query($connexion_init, "SELECT * FROM salles");
+$liste_salles = [];
+while ($row = mysqli_fetch_assoc($res_salles)) {
+    $liste_salles[] = $row;
+}
+mysqli_close($connexion_init);
+	if (isset($_POST['ajouter_capteurs'])) {
 	$nom_salle = htmlspecialchars($_POST['nom_salle']);
     $nom = htmlspecialchars($_POST['nom_capteur']);
-    $type = htmlspecialchars($_POST['type']);
-    $unite = htmlspecialchars($_POST['unite']);
+    $type = htmlspecialchars($_POST['type_capteur']);
+    $unite = htmlspecialchars($_POST['unité']);
 
     if ($nom_salle != "" && $nom != "" && $type != "" && $unite != "") {
         
@@ -17,12 +29,12 @@ session_start();
         mysqli_set_charset($connexion, "utf8");
 
         // Requête préparée avec des ? (syntaxe procédurale)
-        $requete = "INSERT INTO capteurs (nom_salle, nom_capteur, type, unite) VALUES (?, ?, ?)";
+        $requete = "INSERT INTO capteurs (nom_salle, nom_capteur, type_capteur, unité) VALUES (?, ?, ?, ?)";
         $stmt = mysqli_prepare($connexion, $requete);
         
         if ($stmt) {
             // "sss" signifie qu'on envoie 3 chaînes de caractères (string, string, string)
-            mysqli_stmt_bind_param($stmt, "sss", $nom_salle, $nom, $type, $unite);
+            mysqli_stmt_bind_param($stmt, "ssss", $nom_salle, $nom, $type, $unite);
             mysqli_stmt_execute($stmt);
             mysqli_stmt_close($stmt);
             
@@ -38,7 +50,7 @@ session_start();
             'nom_salle' 	=> $nom_salle,
             'nom_capteur'   => $nom,
             'type_capteur'  => $type,
-			'unite'     	=> $unite
+			'unité'     	=> $unite
 		
         ];
         
@@ -56,8 +68,8 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <title>Ajouter un capteur</title>
-    <link rel="stylesheet" type="text/css" href="../styles/smi.css" />
-   <link rel="stylesheet" type="text/css" href="../styles/tableau.css" />
+    <link rel="stylesheet" type="text/css" href="../../styles/smi.css" />
+   <link rel="stylesheet" type="text/css" href="../../styles/tableau.css" />
 </head>
 <body>
 
@@ -79,8 +91,8 @@ session_start();
                     <?php } else { ?>
 					    <!-- We get the name of the sensors in the drop-down menu -->
                         <?php foreach ($liste_salles as $index => $salle) { ?>
-							<option value="<?php echo htmlspecialchars($salle['nom']); ?>">          
-								<?php echo ($index + 1) . " - " . $salle['nom']; ?>
+							<option value="<?php echo htmlspecialchars($salle['nom_salle']); ?>">          
+								<?php echo ($index + 1) . " - " . $salle['nom_salle']; ?>
                             </option>
                         <?php } ?>
                     <?php } ?>
@@ -93,11 +105,11 @@ session_start();
             </p>
             <p>
                 <label for="type">Type de capteur :</label><br>
-                <input type="text" id="type" name="type" required>
+                <input type="text" id="type" name="type_capteur" required>
             </p>
             <p>
                 <label for="unite">Unité de mesure :</label><br>
-                <input type="text" id="unite" name="unite" required>
+                <input type="text" id="unite" name="unité" required>
             </p>
             <button type="submit" name="ajouter_capteurs">Enregistrer en BDD</button>
         </form>

@@ -135,7 +135,6 @@ Figure 9 : exemple d’absence de données sur grafana
         <li>l’heure de la mesure ;</li>
         <li>la valeur mesurée.</li>
     </ul>
- <br>
  Le nom du capteur est construit de manière à identifier à la fois le type de mesure et le capteur concerné, par exemple temperature_AM107-33 ou co2_AM107-4. <br>
  <img class= "image-responsive" src="./images/tableau.png" alt="Tableau sql" /><br><br>
  Figure 11 : donné enregistrée dans la table de donnée <br>
@@ -148,17 +147,40 @@ d’automatiser la collecte des mesures, de conserver un historique des données
 Difficultés rencontrées : <br>
 La mise en place de ce script a demandé plusieurs ajustements. En effet, le format des données reçues a dû être vérifié et adapté au traitement PHP, et la structure de la base de données a évolué au fil du projet. De plus, l’automatisation du lancement du script a nécessité l’utilisation d’une tâche planifiée (crontab) afin d’exécuter régulièrement la récupération des données.<br>
 <img class= "image-responsive" src="./images/crontab_script.png" alt="Crontab Script" /><br><br>
-
-
-
-
-
-
-
+Figure 12 : crontab
 
 </section>
 <section>
     <h2>Thibault : pages web et la base de données</h2>
+    <p> Tout d'abord, la première tâche que j'ai réalisé, a été le croquis du modèle <strong>Entités - Associations.</strong><br>
+		En effet, lors de la première séance de TP encadré, j'ai été aidé de Alexi, afin de réfléchir à ce  <br>
+		modèle, avant de faire un schéma du modèle relationnel et la base de donnée. Nous avons du faire    <br>
+		valider le modèle Entités - Associations et le schéma du modèle relationnel, par Mr Brulin          <br>
+		(professeur encadrant la séance) avant de se lancer dans <br> la conception de la base de données 
+		sur <strong>phpMyAdmin</strong>.
+	</p>
+	<p> Ensuite, j'ai pu m'attaquer à la base de données lors des séances qui ont suivi.
+		Pour ce faire, j'ai créer les tables en graphique sur phpMyAdmin qui est un gestionnaire de bases de<br>
+		données, tout en respectant les caractéristiques des attributs (type de valeur/nombre de caractère).<br>
+		Or, dès le début, je me suis rendu compte que, pour ajouter des clés étrangères, il fallait dans    <br>
+		la section "Index" lors de la création d'une table, choisir dans le menu déroulant l'option <strong>"INDEX"</strong>.<br>
+		Cette étape achevée, il ne restait donc plus qu'à relier les tables entre-elles via ces clés 		<br>
+		étrangères. Il fallait se rendre dans une table, aller dans la section "vue relationnelle" afin de  <br>
+		créer la contrainte de clé étrangère. Ainsi, toutes les tables ont pu correctement être lié.
+	</p>
+	<p> Enfin, j'ai travaillé sur la partie <strong>"Adminstrateur"</strong> du site web, i.e que la page   <br>
+	récupère les données de certaines tables affichées sous forme de tableaux, où l'on peut ajouter et      <br>
+	supprimer des lignes. Sur cette partie, j'ai créer des dossiers avec chacun un fichier ajouter et       <br>
+	supprimer en fonction des différentes tables. J'ai eu beaucoup de mal à faire les liens entre les pages <br>
+	avec les différentes variables, la partie pour se connecter à MySql et les blocs en codés php.
+	</p>
+	<p>
+		Pour conclure, cette SAé a été très formative par le pluralisme des tâches à réaliser et des        <br>
+		logiciels et interfaces utilisées. Mais elle porte des aspects bien complexes quant à la bonne forme<br>
+		des codes php et à bien faire les liasons entre les pages web et la base de données.
+		C'est donc un projet qui remet en place de nombreuses ressources(R109,R115,R207,R209)
+	</p>
+    
 </section>
 <section>
     <h2>Alexi : pages web</h2> <br>
@@ -180,6 +202,19 @@ La première solution, basée sur une architecture Docker avec Mosquitto, Node-R
 
 La seconde solution, fondée sur un site web dynamique en PHP/MySQL, a demandé davantage de travail de conception et de développement, mais elle répond plus précisément au cahier des charges. Elle offre une meilleure gestion des comptes, des droits d’accès et de l’affichage des données selon les profils utilisateurs, tout en assurant une interface plus adaptée à une utilisation réelle au sein de l’IUT.<br><br>
 
-Malgré certaines difficultés rencontrées au cours du projet, notamment lors de l’automatisation des scripts, de la mise en place de la base de données ou encore du démarrage des conteneurs, nous avons su nous organiser, nous répartir les tâches et adapter notre planning. 
+Malgré certaines difficultés rencontrées au cours du projet, notamment lors de l’automatisation des scripts, de la mise en place de la base de données ou encore du démarrage des conteneurs, nous avons su nous organiser, nous répartir les tâches et adapter notre planning. <br><br>
 
+Le cahier des charges a été respecté à 75 %, car tout d'abord le script de récupération de données de ne s'adapter pas s'il y a l'ajout d'un nouveau capteur. Ensuite le faites qu'il n'y a pas de liste déroulant pour choisir le capteur, et même choisir l'horaire ou l'on veut voir les données, c'est pour cella qu'on ne remplit pas entièrement le cahier des charges.
     </section>
+    <footer>
+    <ul>
+		<li><a href="index.html" class="first">Accueil</a></li>  
+		<li><a href="login_form.php">Administration pour ajoutez/supprimez des données</a></li>  
+		<li><a href="consultation.php">Consultation</a></li>
+		<li><a href="choix_gestion.php">Gestion</a></li>  
+		<li><a href="#">Gestion de projet</a></li>
+		
+    </ul>
+   </footer>
+  </body>
+</html>

@@ -3,7 +3,11 @@
 session_start();
 
 // Recovery of bâtiment list for the drop-down menu
-$liste_batiments = isset($_SESSION['liste_bat']) ? $_SESSION['liste_bat'] : [];
+$connexion_init = mysqli_connect("localhost", "facci", "rt", "sae23");
+mysqli_set_charset($connexion_init, "utf8");
+$resultat_bat = mysqli_query($connexion_init, "SELECT * FROM bâtiments");
+$liste_batiments = mysqli_fetch_all($resultat_bat, MYSQLI_ASSOC);
+mysqli_close($connexion_init);
 
 if (isset($_POST['ajouter_salle'])) {
     // Data recovery from the form
@@ -21,12 +25,12 @@ if (isset($_POST['ajouter_salle'])) {
         mysqli_set_charset($connexion, "utf8");
 
         // Requête préparée avec des ? 
-        $requete = "INSERT INTO salles (nom_salle, type, capacite) VALUES (?, ?, ?)";
+        $requete = "INSERT INTO salles (ID_bât, nom_salle, type, capacite_accueil) VALUES (?, ?, ?, ?)";
         $stmt = mysqli_prepare($connexion, $requete);
         
         if ($stmt) {
             // "sss" signifie qu'on envoie 3 chaînes de caractères (string, string, string)
-            mysqli_stmt_bind_param($stmt, "sss", $nom, $type, $capacite);
+            mysqli_stmt_bind_param($stmt, "isss", $id_bat, $nom, $type, $capacite);
             mysqli_stmt_execute($stmt);
             mysqli_stmt_close($stmt);
             
@@ -40,10 +44,10 @@ if (isset($_POST['ajouter_salle'])) {
         }
         
         $_SESSION['liste_salles'][] = [
-            'id_bat'   => $id_bat,
-            'nom'      => $nom,
+            'id_bât'   => $id_bat,
+            'nom_salle'      => $nom,
             'type'     => $type,
-            'capacite' => $capacite
+            'capacite_accueil' => $capacite
         ];
         
         $_SESSION['flash_message'] = "Salle ajoutée avec succès !";
@@ -58,8 +62,8 @@ if (isset($_POST['ajouter_salle'])) {
 <head>
     <meta charset="UTF-8">
     <title>Ajouter une salle</title>
-    <link rel="stylesheet" type="text/css" href="../styles/smi.css" />
-   <link rel="stylesheet" type="text/css" href="../styles/tableau.css" />
+    <link rel="stylesheet" type="text/css" href="../../styles/smi.css" />
+   <link rel="stylesheet" type="text/css" href="../../styles/tableau.css" />
 </head>
 <body>
 
@@ -80,8 +84,8 @@ if (isset($_POST['ajouter_salle'])) {
                     <?php } else { ?>
 					    <!-- We get the name of the buildings in the drop-down menu -->
                         <?php foreach ($liste_batiments as $index => $bat) { ?>
-                            <option value="<?php echo $index + 1; ?>">
-                                <?php echo ($index + 1) . " - " . $bat['nom_bat']; ?>
+                            <option value="<?php echo $bat['ID_bât']; ?>">
+                                <?php echo $bat['ID_bât'] . " - " . $bat['nom_bât']; ?>
                             </option>
                         <?php } ?>
                     <?php } ?>

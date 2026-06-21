@@ -13,7 +13,7 @@ if (isset($_POST['confirmer_suppression'])) {
     }
     mysqli_set_charset($connexion, "utf8");
 
-    $requete = "DELETE FROM bâtiments WHERE id_bat = ?";
+    $requete = "DELETE FROM bâtiments WHERE ID_bât = ?";
     $stmt = mysqli_prepare($connexion, $requete);
     
     if ($stmt) {
@@ -51,8 +51,8 @@ $user = $_SESSION['liste_bat'][$index];
 <head>
     <meta charset="UTF-8">
     <title>Confirmation de suppression</title>
-        <link rel="stylesheet" type="text/css" href="../styles/smi.css" />
-   <link rel="stylesheet" type="text/css" href="../styles/tableau.css" />
+    <link rel="stylesheet" type="text/css" href="../../styles/smi.css" />
+   <link rel="stylesheet" type="text/css" href="../../styles/tableau.css" />
 </head>
 <body>
 
@@ -66,12 +66,12 @@ $user = $_SESSION['liste_bat'][$index];
             <p>Êtes-vous sûr de vouloir supprimer définitivement ce bâtiment ?</p>
             
             <ul>
-                <li><strong>Bâtiment :</strong> <?php echo $user['nom_bat']; ?></li>
+                <li><strong>Bâtiment :</strong> <?php echo $user['nom_bât']; ?></li>
                 <li><strong>Login :</strong> <?php echo $user['login']; ?></li>
             </ul>
 
             <form method="POST" action="supprimer.php">
-                <input type="hidden" name="id_idx" value="<?php echo $index; ?>">
+                <input type="hidden" name="id_idx" value="<?php echo $user['ID_bât']; ?>">
                 
                 <p>
                     <button type="submit" name="confirmer_suppression">Confirmer la suppression</button><!-- The button will bring us to tableaux_data.php -->

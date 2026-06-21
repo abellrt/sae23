@@ -5,7 +5,7 @@ session_start();
 if (isset($_POST['ajouter_batiment'])) {
     $nom = htmlspecialchars($_POST['nom_bat']);
     $login = htmlspecialchars($_POST['login']);
-    $mdp = htmlspecialchars($_POST['mdp']);
+    $mdp = htmlspecialchars($_POST['mot_de_passe']);
 
     if ($nom != "" && $login != "" && $mdp != "") {
         
@@ -16,7 +16,7 @@ if (isset($_POST['ajouter_batiment'])) {
         mysqli_set_charset($connexion, "utf8");
 
         // Requête préparée avec des ? (syntaxe procédurale)
-        $requete = "INSERT INTO bâtiments (nom_bat, login, mdp) VALUES (?, ?, ?)";
+        $requete = "INSERT INTO bâtiments (nom_bât, login, mot_de_passe) VALUES (?, ?, ?)";
         $stmt = mysqli_prepare($connexion, $requete);
         
         if ($stmt) {
@@ -34,9 +34,9 @@ if (isset($_POST['ajouter_batiment'])) {
             $_SESSION['liste_bat'] = [];
         }
         $_SESSION['liste_bat'][] = [
-            'nom_bat' => $nom,
+            'nom_bât' => $nom,
             'login'   => $login,
-            'mdp'     => $mdp
+            'mot_de_passe'     => $mdp
         ];
         
         $_SESSION['flash_message'] = "Bâtiment ajouté !";
@@ -52,8 +52,8 @@ if (isset($_POST['ajouter_batiment'])) {
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href=".../styles/smi.css" />
-   <link rel="stylesheet" type="text/css" href=".../styles/tableau.css" />
+    <link rel="stylesheet" type="text/css" href="../../styles/smi.css" />
+   <link rel="stylesheet" type="text/css" href="../../styles/tableau.css" />
     <title>Ajouter un bâtiment</title>
 </head>
 <body>
@@ -75,7 +75,7 @@ if (isset($_POST['ajouter_batiment'])) {
             </p>
             <p>
                 <label for="mdp">Mot de passe :</label><br>
-                <input type="password" id="mdp" name="mdp" required>
+                <input type="password" id="mot_de_passe" name="mot_de_passe" required>
             </p>
             <button type="submit" name="ajouter_batiment">Enregistrer en BDD</button>
         </form>
